@@ -33,7 +33,8 @@ int main(void)
 	std::fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 	std::cout << glGetString(GL_VERSION) << std::endl;
 
-
+	
+	// Every line is one vertex position (vertex is a point in geometry)
 	float position[6] = {
 		-0.5f, -0.5f,
 		 0.0f,  0.5f,
@@ -44,6 +45,9 @@ int main(void)
 	glGenBuffers(1, &buffer); // Return ID for this new buffer
 	glBindBuffer(GL_ARRAY_BUFFER, buffer); // Selecting buffer select == bind
 	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), position, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
