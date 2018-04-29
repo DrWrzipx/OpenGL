@@ -135,16 +135,16 @@ int main(void)
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
-	
-
-	//unsigned int shader = CreateShader(vertexShader, fragmentShader);
-	//glUseProgram(shader);
 
 	ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
-	std::cout << "VERTEX SHADER:" << std::endl;
-	std::cout << source.VertexSource << std::endl;
-	std::cout << "FRAGMENT SHADER:" << std::endl;
-	std::cout << source.FragmentSource << std::endl;
+	//std::cout << "VERTEX SHADER:" << std::endl;
+	//std::cout << source.VertexSource << std::endl;
+	//std::cout << "FRAGMENT SHADER:" << std::endl;
+	//std::cout << source.FragmentSource << std::endl;
+
+	unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
+	glUseProgram(shader);
+
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -173,7 +173,7 @@ int main(void)
 	}
 
 
-	//glDeleteProgram(shader);
+	glDeleteProgram(shader);
 
 	glfwTerminate();
 	return 0;
