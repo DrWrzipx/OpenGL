@@ -121,16 +121,28 @@ int main(void)
 
 	
 	// Every line is one vertex position (vertex is a point in geometry)
-	float position[6] = {
-		-0.5f, -0.5f,
-		 0.0f,  0.5f,
-	 	 0.5f, -0.5f
+	float position[] = {
+		-0.5f, -0.5f, // 0
+		 0.5f,  -0.5f, // 1
+	 	 0.5f, 0.5f, // 2
+		 -0.5f, 0.5f, // 3
+	};
+
+	unsigned int indices[] = {
+		0, 1, 2,
+		2, 3, 0
 	};
 
 	unsigned int buffer; // Creating buffer
 	glGenBuffers(1, &buffer); // Return ID for this new buffer
 	glBindBuffer(GL_ARRAY_BUFFER, buffer); // Selecting buffer select == bind
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), position, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), position, GL_STATIC_DRAW);
+
+
+	unsigned int ibo; // Creating buffer
+	glGenBuffers(1, &ibo); // Return ID for this new buffer
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo); // Selecting buffer select == bind
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * 2 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
@@ -163,8 +175,8 @@ int main(void)
 		glVertex2f(0.5f, -0.5f);
 		glEnd();*/
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
