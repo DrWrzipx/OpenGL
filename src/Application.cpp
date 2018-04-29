@@ -20,7 +20,11 @@ static bool GLLogCall(const char* function, const char* file, int line)
 {
 	while (GLenum error = glGetError())
 	{
-		std::cout << "[OpenGL Error: ] (" << error << ")" << std::endl << " Function name: " << function << std::endl << " File path: " << file << std::endl << " Line number: " << line << std::endl;
+		std::cout << "[OpenGL Error: ] (" 
+			<< error << ")" << std::endl 
+			<< " Function name: " << function << std::endl 
+			<< " File path: " << file << std::endl 
+			<< " Line number: " << line << std::endl;
 		return false;
 	}
 
@@ -198,7 +202,7 @@ int main(void)
 		glEnd();*/
 
 		//glDrawArrays(GL_TRIANGLES, 0, 6);
-		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr));
+		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
 
 		/* Swap front and back buffers */
