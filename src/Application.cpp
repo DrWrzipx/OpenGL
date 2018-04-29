@@ -136,6 +136,7 @@ int main(void)
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
 
+	// Prepare source code of shader
 	ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
 	//std::cout << "VERTEX SHADER:" << std::endl;
 	//std::cout << source.VertexSource << std::endl;
@@ -172,7 +173,7 @@ int main(void)
 		glfwPollEvents();
 	}
 
-
+	// After rendering delete shader
 	glDeleteProgram(shader);
 
 	glfwTerminate();
